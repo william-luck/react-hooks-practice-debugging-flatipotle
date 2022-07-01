@@ -11,12 +11,13 @@ const DEFAULT_STATE = {
   sides: [],
 };
 
-function Form() {
+function Form({addOrder}) {
   const [formState, setFormState] = useState(DEFAULT_STATE);
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     event.preventDefault();
-    props.addOrder(formState);
+    console.log(formState)
+    addOrder(formState);
 
     setFormState({
       ...DEFAULT_STATE,
@@ -24,7 +25,7 @@ function Form() {
     event.target.reset();
   }
 
-  function handleChange() {
+  function handleChange(event) {
     const itemType = event.target.name;
     const item = event.target.value;
 
@@ -52,15 +53,15 @@ function Form() {
 
         <FillingForm
           fillings={formState.fillings}
-          handleOnChange={handleChange}
+          handleChange={handleChange}
         />
 
         <ToppingForm
           toppings={formState.toppings}
-          handleOnChange={handleChange}
+          handleChange={handleChange}
         />
 
-        <SideForm sides={formState.sides} handleOnChange={handleChange} />
+        <SideForm sides={formState.sides} handleChange={handleChange} />
 
         <br />
 
